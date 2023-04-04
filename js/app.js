@@ -25,6 +25,7 @@ function eventListeners() {
       subject.addEventListener('blur', validateField);
       message.addEventListener('blur', validateField);
 
+      sendEmailForm.addEventListener('submit', sendEmail);
       resetBtn.addEventListener('click', resetForm);
 
 }
@@ -36,24 +37,25 @@ function eventListeners() {
 
 //app Initialization
 function appInit() {
-
       sendBtn.disabled = true;
 }
 
-
-      //show the spinner
-      
-      //show the image
-      
-
-
-      //hide the spinner after 5 sec then show the send email
-      
-            //hide spinner
-
-            //show the image
-            //hide the image
-         
+function sendEmail(e) {
+      e.preventDefault();
+      const spinner = document.querySelector('#spinner');
+      spinner.style.display = 'block';
+      const sendEmailImg = document.createElement('img');
+      sendEmailImg.src = 'img/mail.gif';
+      sendEmailImg.style.display = 'block'
+      setTimeout(function() {
+            spinner.style.display = 'none';
+            document.querySelector('#loaders').appendChild( sendEmailImg );
+            setTimeout(function () {
+                  sendEmailForm.reset();
+                  sendEmailImg.remove();
+            },5000);
+      },3000);
+}         
 
 //Validate the fields
 function validateField() {
